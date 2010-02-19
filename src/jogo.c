@@ -69,24 +69,24 @@
 #define LETRAS_ALT                  27
 #define LETRAS_LARG                 21
 
-#define PATH_JOIA_1                 "./imagens/joias/joia1.tga"
-#define PATH_JOIA_2                 "./imagens/joias/joia2.tga"
-#define PATH_JOIA_3                 "./imagens/joias/joia3.tga"
-#define PATH_JOIA_4                 "./imagens/joias/joia4.tga"
-#define PATH_JOIA_5                 "./imagens/joias/joia5.tga"
-#define PATH_JOIA_6                 "./imagens/joias/joia6.tga"
-#define PATH_JOIA_7                 "./imagens/joias/joia7.tga"
-#define PATH_JOIA_TAPA              "./imagens/joias/tapajoias.tga"
-#define PATH_BOTAO_DICA             "./imagens/jogo/botaodica.tga"
-#define PATH_BOTAO_PAUSE            "./imagens/jogo/botaopausa.tga"
-#define PATH_BOTAO_SAIR             "./imagens/jogo/botaovoltamenu.tga"
-#define PATH_FUNDO                  "./imagens/jogo/fundo.tga"
-#define PATH_MIRA_MARCA             "./imagens/jogo/mira_marca.tga"
-#define PATH_NUMEROS                "./imagens/frames/numeros.tga"
-#define PATH_LETRAS                 "./imagens/frames/letras.tga"
-#define PATH_GAMEOVER_SCREEN        "./imagens/gameover/gameover.tga"
-#define PATH_GAMEOVER_RECORDE       "./imagens/gameover/recorde.tga"
-#define PATH_GAMEOVER_OK            "./imagens/gameover/botaook.tga"
+#define PATH_JOIA_1                 "./imgs/joias/joia1.tga"
+#define PATH_JOIA_2                 "./imgs/joias/joia2.tga"
+#define PATH_JOIA_3                 "./imgs/joias/joia3.tga"
+#define PATH_JOIA_4                 "./imgs/joias/joia4.tga"
+#define PATH_JOIA_5                 "./imgs/joias/joia5.tga"
+#define PATH_JOIA_6                 "./imgs/joias/joia6.tga"
+#define PATH_JOIA_7                 "./imgs/joias/joia7.tga"
+#define PATH_JOIA_TAPA              "./imgs/joias/tapajoias.tga"
+#define PATH_BOTAO_DICA             "./imgs/jogo/botaodica.tga"
+#define PATH_BOTAO_PAUSE            "./imgs/jogo/botaopausa.tga"
+#define PATH_BOTAO_SAIR             "./imgs/jogo/botaovoltamenu.tga"
+#define PATH_FUNDO                  "./imgs/jogo/fundo.tga"
+#define PATH_MIRA_MARCA             "./imgs/jogo/mira_marca.tga"
+#define PATH_NUMEROS                "./imgs/frames/numeros.tga"
+#define PATH_LETRAS                 "./imgs/frames/letras.tga"
+#define PATH_GAMEOVER_SCREEN        "./imgs/gameover/gameover.tga"
+#define PATH_GAMEOVER_RECORDE       "./imgs/gameover/recorde.tga"
+#define PATH_GAMEOVER_OK            "./imgs/gameover/botaook.tga"
 /* Structs */
 typedef struct _JOIA
 {
@@ -94,7 +94,7 @@ typedef struct _JOIA
     int troca_cima, troca_esquerda, troca_direita, troca_baixo;
 } JOIA;
 
-/* Prototipos das funções */
+/* Prototipos das funï¿½ï¿½es */
 int CairPedras(BITMAP *fundo, JOIA matriz_grade[10][10], BITMAP *joias[8], BITMAP *buffer);
 int ClicouBotaoPause(void);
 int ClicouBotaoDica(void);
@@ -103,8 +103,8 @@ int DestroiCombinacoes(int linha, int coluna, BITMAP *buffer, BITMAP *fundo, JOI
 int ExisteJogadaPossivel(JOIA matriz_grade[10][10]);
 int GetDirection(int quad1_linha, int quad1_coluna, int quad2_linha, int quad2_coluna); /* Retorna se o quadrado 2 esta acima, a direita, embaixo ou a esquerda */
 int LoadButtons(BITMAP *buttons[3]);
-int ModuloDiferenca(int x, int y); /* Função para calcular o módulo da diferenca entre 2 números */
-int MouseDentroDaGrade(void); /* Retorna 1 caso o mouse esteja dentro da area da grade... 0 se não) */
+int ModuloDiferenca(int x, int y); /* Funï¿½ï¿½o para calcular o mï¿½dulo da diferenca entre 2 nï¿½meros */
+int MouseDentroDaGrade(void); /* Retorna 1 caso o mouse esteja dentro da area da grade... 0 se nï¿½o) */
 int PassouDeFase(int fase, int pontos);
 int PreCacheMoves(JOIA matriz_grade[10][10]);
 int QuadradoAdjacente(int quad1_x, int quad1_y, int quad2_x, int quad2_y);
@@ -135,7 +135,7 @@ void RedrawTempo(BITMAP *fundo, BITMAP *buffer, BITMAP *numeros[10]);
 void ResetButton(BITMAP *fundo, BITMAP *buffer);
 void ScreenToBuffer(BITMAP *buffer);
 void TimerTempoContagem();
-void Troca(JOIA matriz_grade[10][10], int coord_clique[2][2], BITMAP *buffer, BITMAP *fundo, BITMAP *Joias[8]); /* Troca os círculos selecionados */
+void Troca(JOIA matriz_grade[10][10], int coord_clique[2][2], BITMAP *buffer, BITMAP *fundo, BITMAP *Joias[8]); /* Troca os cï¿½rculos selecionados */
 void Verifica(int linha, int coluna); /* Faz a verificacao para destruir 3 ou mais joias iguais... na horizontal ou vertical */
 void ZeraVetorJoias(JOIA matriz_grade[10][10]);
 
@@ -173,9 +173,9 @@ void NovoJogo(void)
 	SAMPLE * troca;
 	SAMPLE * pause;
 
-	CarregaSom(&pause, "./sons/pause.wav");
-	CarregaSom(&dica, "./sons/dica.wav");
-	CarregaSom(&troca, "./sons/troca.wav");
+	CarregaSom(&pause, "./sound/pause.wav");
+	CarregaSom(&dica, "./sound/dica.wav");
+	CarregaSom(&troca, "./sound/troca.wav");
 
     /*int matriz_grade[10][10]; */ /* Armazena as joias contidas na grade */
     int coord_clique[2][2],
@@ -237,7 +237,7 @@ void NovoJogo(void)
 	DrawBackground(fundo, buffer);
 	DesenhaJoias(Joias, matriz_grade, buffer);
 
-    /* Iniciando os indicadores gráficos */
+    /* Iniciando os indicadores grï¿½ficos */
     show_mouse(NULL);
     AtualizaPontuacao(fundo, buffer, pontos, numeros);
     AtualizaPontuacaoBonus(fundo, buffer, pontos_bonus, numeros);
@@ -256,7 +256,7 @@ void NovoJogo(void)
     {
         while((mouse_b & 1)) /* Espera o jogador soltar o mouse...*/
         {
-            if(ClicouBotaoDica() && ultimo_clicado != 1) /* Clicou no botão de dica */
+            if(ClicouBotaoDica() && ultimo_clicado != 1) /* Clicou no botao de dica */
             {
                 ResetButton(fundo, buffer);
                 draw_sprite(buffer, buttons[0], BT_DICA_X, BT_DICA_Y);
@@ -265,7 +265,7 @@ void NovoJogo(void)
                 show_mouse(screen);
                 ultimo_clicado = 1;
             }
-            else if(ClicouBotaoPause() && ultimo_clicado != 2) /* Clicou no botão de pause */
+            else if(ClicouBotaoPause() && ultimo_clicado != 2) /* Clicou no botao de pause */
             {
                 ResetButton(fundo, buffer);
                 draw_sprite(buffer, buttons[1], BT_PAUSE_X, BT_PAUSE_Y);
@@ -274,7 +274,7 @@ void NovoJogo(void)
                 show_mouse(screen);
                 ultimo_clicado = 2;
             }
-            else if(ClicouBotaoSair() && ultimo_clicado != 3) /* Clicou no botão p/ sair do jogo */
+            else if(ClicouBotaoSair() && ultimo_clicado != 3) /* Clicou no botao p/ sair do jogo */
             {
                 ResetButton(fundo, buffer);
                 draw_sprite(buffer, buttons[2], BT_SAIR_X, BT_SAIR_Y);
@@ -310,7 +310,7 @@ void NovoJogo(void)
 
         while(!(mouse_b & 1)) /* Espera o jogador clicar */
         {
-            if(ClicouBotaoDica() && ultimo_clicado != 1) /* Clicou no botão de dica */
+            if(ClicouBotaoDica() && ultimo_clicado != 1) /* Clicou no botao de dica */
             {
                 ResetButton(fundo, buffer);
                 draw_sprite(buffer, buttons[0], BT_DICA_X, BT_DICA_Y);
@@ -319,7 +319,7 @@ void NovoJogo(void)
                 show_mouse(screen);
                 ultimo_clicado = 1;
             }
-            else if(ClicouBotaoPause() && ultimo_clicado != 2) /* Clicou no botão de pause */
+            else if(ClicouBotaoPause() && ultimo_clicado != 2) /* Clicou no botao de pause */
             {
                 ResetButton(fundo, buffer);
                 draw_sprite(buffer, buttons[1], BT_PAUSE_X, BT_PAUSE_Y);
@@ -328,7 +328,7 @@ void NovoJogo(void)
                 show_mouse(screen);
                 ultimo_clicado = 2;
             }
-            else if(ClicouBotaoSair() && ultimo_clicado != 3) /* Clicou no botão p/ sair do jogo */
+            else if(ClicouBotaoSair() && ultimo_clicado != 3) /* Clicou no botao p/ sair do jogo */
             {
                 ResetButton(fundo, buffer);
                 draw_sprite(buffer, buttons[2], BT_SAIR_X, BT_SAIR_Y);
@@ -386,10 +386,10 @@ void NovoJogo(void)
                 BufferToScreen(buffer, screen);
                 show_mouse(screen);
 
-                /* Checa se são adjacentes */
+                /* Checa se sao adjacentes */
                 if(!QuadradoAdjacente(coord_clique[0][0], coord_clique[0][1], coord_clique[1][0], coord_clique[1][1]))
                 {
-                    /* não sao adjacentes */
+                    /* nao sao adjacentes */
                     clique = 0;
                     /*Despausa o timer */
                     game_paused = 0;
@@ -430,7 +430,7 @@ void NovoJogo(void)
                         break;
                 }
 
-                if(!clique) /* A troca não é valida */
+                if(!clique) /* A troca nao eh valida */
                 {
                     play_sample(troca, volume, 128, 1000, 0);
                     show_mouse(NULL);
@@ -469,7 +469,7 @@ void NovoJogo(void)
                         show_mouse(screen);
                         /* preenche a linha 0 com pedras */
                         show_mouse(NULL);
-                        if(PreencheLinha0(matriz_grade, Joias, buffer)) /* Se não há mais espaços em branco, free_to_go = 1 */
+                        if(PreencheLinha0(matriz_grade, Joias, buffer)) /* Se nï¿½o hï¿½ mais espaï¿½os em branco, free_to_go = 1 */
                         {
                             free_to_go = 0;
                             BufferToScreen(buffer, screen);
@@ -513,7 +513,7 @@ void NovoJogo(void)
                 game_paused = 0;
             }
         }
-        else if(ClicouBotaoPause()) /* Clicou no botão de pausa */
+        else if(ClicouBotaoPause()) /* Clicou no botao de pausa */
         {
             /*Pausa o timer */
             game_paused = 1;
@@ -522,7 +522,7 @@ void NovoJogo(void)
             /*Despausa o timer */
             game_paused = 0;
         }
-        else if(ClicouBotaoDica()) /* Clicou no botão de dica */
+        else if(ClicouBotaoDica()) /* Clicou no botao de dica */
         {
             /*Pausa o timer */
             game_paused = 1;
@@ -538,7 +538,7 @@ void NovoJogo(void)
             /*Despausa o timer */
             game_paused = 0;
         }
-        else if(ClicouBotaoSair()) /* Clicou no botão p/ sair do jogo */
+        else if(ClicouBotaoSair()) /* Clicou no botao p/ sair do jogo */
         {
             break;
         }
@@ -590,9 +590,9 @@ void CarregaJoias (BITMAP *joias[8], JOIA matriz_grade[10][10])
 
                 if((linha < 2) && (coluna < 2)) /* Nao e necessario fazer checagem aqui, pois nao a possibilidade de ter 3 iguais... sao os 4 do canto superior esquerdo*/
                     break;
-                else if((linha < 2) && !((matriz_grade[linha][coluna].joia == matriz_grade[linha][coluna-1].joia) && (matriz_grade[linha][coluna].joia == matriz_grade[linha][coluna-2].joia))) /* Checagem para as 2 primeiras linhas... logo não precisamos fazer verificacao vertical, so horizontal */
+                else if((linha < 2) && !((matriz_grade[linha][coluna].joia == matriz_grade[linha][coluna-1].joia) && (matriz_grade[linha][coluna].joia == matriz_grade[linha][coluna-2].joia))) /* Checagem para as 2 primeiras linhas... logo nï¿½o precisamos fazer verificacao vertical, so horizontal */
                     break;
-                else if((coluna < 2) && !((matriz_grade[linha][coluna].joia == matriz_grade[linha-1][coluna].joia) && (matriz_grade[linha][coluna].joia == matriz_grade[linha-2][coluna].joia))) /* Checagem para as 2 primeiras colunas... logo não precisamos fazer verificacao horizontal, so vertical */
+                else if((coluna < 2) && !((matriz_grade[linha][coluna].joia == matriz_grade[linha-1][coluna].joia) && (matriz_grade[linha][coluna].joia == matriz_grade[linha-2][coluna].joia))) /* Checagem para as 2 primeiras colunas... logo nï¿½o precisamos fazer verificacao horizontal, so vertical */
                     break;
                 else if(!(matriz_grade[linha][coluna].joia == matriz_grade[linha][coluna-1].joia && matriz_grade[linha][coluna].joia == matriz_grade[linha][coluna-2].joia) &&
                         !(matriz_grade[linha][coluna].joia == matriz_grade[linha-1][coluna].joia && matriz_grade[linha][coluna].joia == matriz_grade[linha-2][coluna].joia))
@@ -696,7 +696,7 @@ int GetDirection(int quad1_linha, int quad1_coluna, int quad2_linha, int quad2_c
     else if(quad1_coluna > quad2_coluna)
         return 3; /* Quad 2 esta a esquerda do quad1 */
 
-    return -1; /* ERRO!!! Nunca deveria chegar até aqui */
+    return -1; /* ERRO!!! Nunca deveria chegar ate aqui */
 }
 void ApagaQuadrado(int linha, int coluna, BITMAP *target, BITMAP *fundo)
 {
@@ -714,7 +714,7 @@ void Troca(JOIA matriz_grade[10][10], int coord_clique[2][2], BITMAP *buffer, BI
     ApagaQuadrado(coord_clique[0][0], coord_clique[0][1], buffer, fundo);
     ApagaQuadrado(coord_clique[1][0], coord_clique[1][1], buffer, fundo);
 
-    /*Animação de troca */
+    /*Animacao de troca */
     blit(buffer, ori_buffer, 0, 0, 0, 0, 800, 600);
 
     switch(GetDirection(coord_clique[0][0], coord_clique[0][1], coord_clique[1][0], coord_clique[1][1]))
@@ -882,17 +882,17 @@ int DestroiCombinacoes(int linha, int coluna, BITMAP *buffer, BITMAP *fundo, JOI
 {
 	SAMPLE * vidro;
 	int bin=1, cont=0, count_g = 0, destroeQuad=0;
-	/* A variavel bin sera utilizada para comparação binaria mais a frente:
-        Seus bits servem para indicar quais quadrados terao que ser destruidos mais a frente... se tiver 1, destroe quadrado, 0 não.
-        Contando os bits da direita para a esquerda (1º = bit 0, 2º = bit 1, 3º = bit 2)...
-        1º - bit sempre ligado...
-        2º - quadrado adjacente a esquerda / quadrado adjacente acima
-        3º - segundo quadrado a esquerda / segundo quadrado acima
-        4º - quadrado adjacente a direita / quadrado adjacente abaixo
-        5º - segundo quadrado a direita / segundo quadrado abaixo
+	/* A variavel bin sera utilizada para comparacao binaria mais a frente:
+        Seus bits servem para indicar quais quadrados terao que ser destruidos mais a frente... se tiver 1, destroe quadrado, 0 nao.
+        Contando os bits da direita para a esquerda (1o = bit 0, 2o = bit 1, 3o = bit 2)...
+        1o - bit sempre ligado...
+        2o - quadrado adjacente a esquerda / quadrado adjacente acima
+        3o - segundo quadrado a esquerda / segundo quadrado acima
+        4o - quadrado adjacente a direita / quadrado adjacente abaixo
+        5o - segundo quadrado a direita / segundo quadrado abaixo
     */
 
-    CarregaSom(&vidro, "./sons/vidro.wav");
+    CarregaSom(&vidro, "./sound/vidro.wav");
 
 	/* Verificacoes verticais: */
 	if ((matriz_grade[linha][coluna].joia == matriz_grade[linha-1][coluna].joia) && (linha-1>=0))
@@ -1044,7 +1044,7 @@ int PreCacheMoves(JOIA matriz_grade[10][10])
             if(matriz_grade[linha][coluna].joia == 0)
                 continue;
 
-            if(i > 0) /* Fecha combinação a cima */
+            if(i > 0) /* Fecha combinacao a cima */
             {
                 temp = matriz_grade[linha][coluna].joia;
                 matriz_grade[linha][coluna].joia = matriz_grade[linha-1][coluna].joia;
@@ -1058,7 +1058,7 @@ int PreCacheMoves(JOIA matriz_grade[10][10])
                 matriz_grade[linha][coluna].joia = matriz_grade[linha-1][coluna].joia;
                 matriz_grade[linha-1][coluna].joia = temp;
             }
-            if(i < 9) /* Fecha combinação a baixo */
+            if(i < 9) /* Fecha combinacao a baixo */
             {
                 temp = matriz_grade[linha][coluna].joia;
                 matriz_grade[linha][coluna].joia = matriz_grade[linha+1][coluna].joia;
@@ -1072,7 +1072,7 @@ int PreCacheMoves(JOIA matriz_grade[10][10])
                 matriz_grade[linha][coluna].joia = matriz_grade[linha+1][coluna].joia;
                 matriz_grade[linha+1][coluna].joia = temp;
             }
-            if(j > 0) /* Fecha combinação a esquerda */
+            if(j > 0) /* Fecha combinacao a esquerda */
             {
                 temp = matriz_grade[linha][coluna].joia;
                 matriz_grade[linha][coluna].joia = matriz_grade[linha][coluna-1].joia;
@@ -1086,7 +1086,7 @@ int PreCacheMoves(JOIA matriz_grade[10][10])
                 matriz_grade[linha][coluna].joia = matriz_grade[linha][coluna-1].joia;
                 matriz_grade[linha][coluna-1].joia = temp;
             }
-            if(j < 9) /* Fecha combinação a direita */
+            if(j < 9) /* Fecha combinacao a direita */
             {
                 temp = matriz_grade[linha][coluna].joia;
                 matriz_grade[linha][coluna].joia = matriz_grade[linha][coluna+1].joia;
@@ -1107,14 +1107,14 @@ int PreCacheMoves(JOIA matriz_grade[10][10])
 int VerificaMovimento(JOIA matriz_grade[10][10], int linha, int coluna)
 {
     int bin=1, cont=0;
-	/* A variavel bin sera utilizada para comparação binaria mais a frente:
-        Seus bits servem para indicar quais quadrados terao que ser destruidos mais a frente... se tiver 1, destroe quadrado, 0 não.
-        Contando os bits da direita para a esquerda (1º = bit 0, 2º = bit 1, 3º = bit 2)...
-        1º - bit sempre ligado...
-        2º - quadrado adjacente a esquerda / quadrado adjacente acima
-        3º - segundo quadrado a esquerda / segundo quadrado acima
-        4º - quadrado adjacente a direita / quadrado adjacente abaixo
-        5º - segundo quadrado a direita / segundo quadrado abaixo
+	/* A variavel bin sera utilizada para comparacao binaria mais a frente:
+        Seus bits servem para indicar quais quadrados terao que ser destruidos mais a frente... se tiver 1, destroe quadrado, 0 nao.
+        Contando os bits da direita para a esquerda (1o = bit 0, 2o = bit 1, 3o = bit 2)...
+        1o - bit sempre ligado...
+        2o - quadrado adjacente a esquerda / quadrado adjacente acima
+        3o - segundo quadrado a esquerda / segundo quadrado acima
+        4o - quadrado adjacente a direita / quadrado adjacente abaixo
+        5o - segundo quadrado a direita / segundo quadrado abaixo
     */
 
 	/* Verificacoes verticais: */
@@ -1201,7 +1201,7 @@ int CairPedras(BITMAP *fundo, JOIA matriz_grade[10][10], BITMAP *joias[8], BITMA
     }
 
 
-    /* Prepara o ori_buffer... deixando em branco todos os quadrados que irão cair, isto é, onde linha + 1 = 0 */
+    /* Prepara o ori_buffer... deixando em branco todos os quadrados que irï¿½o cair, isto ï¿½, onde linha + 1 = 0 */
     ScreenToBuffer(ori_buffer);
     /* i=8;i>=0;i-- */
     /* i=0;i<9;i++ */
@@ -1294,7 +1294,7 @@ int SearchAndDestroy(JOIA matriz_grade[10][10], BITMAP *buffer, BITMAP* fundo)
 	SAMPLE * vidro;
     int i, j, count = 0, sd[10][10];
 
-    CarregaSom(&vidro, "./sons/vidro.wav");
+    CarregaSom(&vidro, "./sound/vidro.wav");
 
     for(i=0;i<10;i++)
         for(j=0;j<10;j++)
@@ -2149,14 +2149,14 @@ void CarregaRecordes(char nomes[10][21], int rec_pontos[10])
     int i;
 
     recordes = fopen("recordes.rec", "r");
-    if(!recordes) /* Não achou o arquivo, ou nao pode acessa-lo */
+    if(!recordes) /* Nï¿½o achou o arquivo, ou nao pode acessa-lo */
     {
         /* Supondo que nao tenha achado, vamos tentar cria-lo */
         //fclose(recordes);
         recordes = fopen("recordes.rec", "w");
         if(!recordes) /* Tambem nao pode criar... problemas... */
         {
-            printf("Arquivo recordes.rec não pode ser aberto nem criado!\n");
+            printf("Arquivo recordes.rec nï¿½o pode ser aberto nem criado!\n");
         }
         for(i=0;i<10;i++)
         {
@@ -2186,7 +2186,7 @@ void GravaOrdenado(char nomes[10][21], int rec_pontos[10])
     recordes = fopen("recordes.rec", "w");
     if(!recordes) /* Tambem nao pode criar... problemas... */
     {
-        printf("Arquivo recordes.rec não pode ser aberto nem criado!\n");
+        printf("Arquivo recordes.rec nï¿½o pode ser aberto nem criado!\n");
         return;
     }
 

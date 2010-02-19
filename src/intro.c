@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <allegro.h>
-#include "almp3.h"
+#include "./libs/almp3/almp3.h"
 
-/* Definições do vídeo */
+/* Definicoes de video */
 #define RESOLUCAO_X         800
 #define RESOLUCAO_Y         600
 #define COLOR_DEPTH         16
 
-/* Definições do menu opções */
+/* Definicoes do menu opcoes */
 #define X_INICIAL_BOTOES    260
 #define Y_INICIAL_BOTOES    197
 #define X_MENU				364
@@ -16,7 +16,7 @@
 #define X_INICIAL_VOLUME	400
 #define X_FINAL_VOLUME		528
 
-/* Definições dos créditos */
+/* Definicoes dos creditos */
 #define X_CREDITOS			410
 #define Y_TACOWBERRY		165
 #define Y_FINAL_TACOWBERRY	(Y_TACOWBERRY+RESOLUCAO_Y+37)
@@ -31,7 +31,7 @@
 #define Y_MENDIGO			404
 #define Y_FINAL_MENDIGO		(Y_MENDIGO+RESOLUCAO_Y+41)
 
-/* Definições dos recordes */
+/* Definicoes dos recordes */
 #define MENU_RECORDES_N_X     144
 #define MENU_RECORDES_N_Y     240
 #define MENU_RECORDES_P_X     589
@@ -147,14 +147,15 @@ int IniciaAllegro(void)
 	}
 	install_timer();
 
-	if (install_sound(DIGI_AUTODETECT, MIDI_AUTODETECT, NULL) < 0)
+	if (install_sound(DIGI_AUTODETECT, MIDI_NONE, NULL) < 0)
 	{
 		puts("Programa nao iniciado por erro no som.");
+		allegro_message("Last Allegro error `%s'\n", allegro_error);
 		return (FALSE);
 	}
 
 	set_color_depth(COLOR_DEPTH);
-	if(set_gfx_mode(GFX_AUTODETECT, RESOLUCAO_X, RESOLUCAO_Y, 0, 0)<0)
+	if(set_gfx_mode(GFX_AUTODETECT_WINDOWED, RESOLUCAO_X, RESOLUCAO_Y, 0, 0)<0)
 	{
 		puts("Programa nao iniciado por erro no modo grafico.");
 		return (FALSE);
@@ -167,7 +168,7 @@ void IniciaJogo (void)
 {
 	buffer = create_bitmap (RESOLUCAO_X, RESOLUCAO_Y);
 
-	CarregaBitmap(&mouse, "./imagens/mouse/mira.tga");
+	CarregaBitmap(&mouse, "./imgs/mouse/mira.tga");
 	set_mouse_sprite(mouse);
 	set_mouse_sprite_focus((mouse->w)/2, (mouse->h)/2);
 
@@ -224,9 +225,9 @@ int Menu (void)
 	BITMAP * menu[6];
 	SAMPLE * tiro;
 
-	CarregaSom(&tiro, "./sons/tiro.wav");
-	CarregaBitmap(&fundomenu, "./imagens/menu/menu.tga");
-	SeparaFrames("./imagens/menu/botoesmenu.tga", menu, 6);
+	CarregaSom(&tiro, "./sound/tiro.wav");
+	CarregaBitmap(&fundomenu, "./imgs/menu/menu.tga");
+	SeparaFrames("./imgs/menu/botoesmenu.tga", menu, 6);
 
 	if (!menu_ja_foi_aberto)
 	{
@@ -289,12 +290,12 @@ void Jogo (void)
 	SAMPLE * musicajogo;
 	remove_int(MusicaIntro);
 	ParaMp3(musicaintro);
-	CarregaSom(&musicajogo, "./sons/musicajogo.wav");
+	CarregaSom(&musicajogo, "./sound/musicajogo.wav");
 	play_sample(musicajogo, 255, 128, 1000, 1);
 	NovoJogo();
 	stop_sample(musicajogo);
 	destroy_sample(musicajogo);
-	TocaMp3(&musicaintro, "./sons/musicaintro.mp3");
+	TocaMp3(&musicaintro, "./sound/musicaintro.mp3");
 	install_int_ex(MusicaIntro,10000);
 }
 
@@ -310,8 +311,8 @@ void Recordes (void)
 	BITMAP *letras[26];
 	BITMAP *numeros[10];
 
-	CarregaBitmap(&recordes, "./imagens/recordes.tga");
-	CarregaBitmap(&botaomenu, "./imagens/botaomenu.tga");
+	CarregaBitmap(&recordes, "./imgs/recordes.tga");
+	CarregaBitmap(&botaomenu, "./imgs/botaomenu.tga");
 	EfeitoAbrir(recordes,1, fundomenu, 1, 1, 0, 0, 20);
     for(i=0;i<10;i++)
         rec_pontos[i] = 0;
@@ -320,8 +321,8 @@ void Recordes (void)
         for(j=0;j<21;j++)
             nomes[i][j] = 0;
 
-	SeparaFrames("./imagens/frames/numeros.tga", numeros, 10);
-	SeparaFrames("./imagens/frames/letras.tga", letras, 26);
+	SeparaFrames("./imgs/frames/numeros.tga", numeros, 10);
+	SeparaFrames("./imgs/frames/letras.tga", letras, 26);
 
     CarregaRecordes(nomes, rec_pontos);
 
@@ -500,11 +501,11 @@ void Opcoes (void)
 	BITMAP * explode[20];
 	SAMPLE * explosao;
 
-	CarregaBitmap(&opcoes, "./imagens/opcoes/opcoes.tga");
-	CarregaBitmap(&botaomenu, "./imagens/botaomenu.tga");
-	CarregaBitmap(&botaovolume, "./imagens/opcoes/botaovolume.tga");
-	SeparaFrames("./imagens/frames/explode.tga", explode, 20);
-	CarregaSom (&explosao, "./sons/explosao.wav");
+	CarregaBitmap(&opcoes, "./imgs/opcoes/opcoes.tga");
+	CarregaBitmap(&botaomenu, "./imgs/botaomenu.tga");
+	CarregaBitmap(&botaovolume, "./imgs/opcoes/botaovolume.tga");
+	SeparaFrames("./imgs/frames/explode.tga", explode, 20);
+	CarregaSom (&explosao, "./sound/explosao.wav");
 	EfeitoAbrir(opcoes,1, fundomenu, 1, 1, 0, 0, 20);
 	clear_keybuf();
 	show_mouse(NULL);
@@ -589,8 +590,8 @@ void Ajuda (void)
 	int estasobre=0;
 	BITMAP * ajuda;
 	BITMAP * botaomenu;
-	CarregaBitmap(&ajuda, "./imagens/ajuda.tga");
-	CarregaBitmap(&botaomenu, "./imagens/botaomenu.tga");
+	CarregaBitmap(&ajuda, "./imgs/ajuda.tga");
+	CarregaBitmap(&botaomenu, "./imgs/botaomenu.tga");
 
 	EfeitoAbrir(ajuda,1, fundomenu, 1,1,0,0,20);
 	while (!key[KEY_ESC])
@@ -665,7 +666,7 @@ void Creditos (void)
 		explode[i]=NULL;
 	}
 
-	CarregaBitmap(&creditos, "./imagens/creditos/creditos.tga");
+	CarregaBitmap(&creditos, "./imgs/creditos/creditos.tga");
 
 	clear_keybuf();
 
@@ -676,17 +677,17 @@ void Creditos (void)
 		blit(creditos, buffer, 0,0, (RESOLUCAO_X - creditos->w)/2,RESOLUCAO_Y-i,creditos->w, i );
 
 		if (i==Y_TACOWBERRY)
-			SeparaFrames("./imagens/frames/atira.tga", atira, 4);
+			SeparaFrames("./imgs/frames/atira.tga", atira, 4);
 		if (i>=Y_TACOWBERRY && i<Y_FINAL_TACOWBERRY)
 		{
 			if (i==Y_RECARREGA)
-				SeparaFrames("./imagens/frames/recarrega.tga", recarrega, 19);
+				SeparaFrames("./imgs/frames/recarrega.tga", recarrega, 19);
 			if (i>=Y_RECARREGA && i<Y_FINAL_RECARREGA)
 			{
 				draw_sprite(buffer,recarrega[(i/4)%19], X_CREDITOS, RESOLUCAO_Y - i + Y_TACOWBERRY);
 				if (i==Y_RECARREGA+48)
 				{
-					CarregaSom (&recarrega1, "./sons/recarrega.wav");
+					CarregaSom (&recarrega1, "./sound/recarrega.wav");
 					play_sample(recarrega1, 255, 128, 1000, 0);
 				}
 			}
@@ -707,7 +708,7 @@ void Creditos (void)
 				draw_sprite(buffer,atira[(i/4)%4], X_CREDITOS, RESOLUCAO_Y - i + Y_TACOWBERRY);
 				if ((i/4)%4 == 0)
 				{
-					CarregaSom (&tiro, "./sons/tiro.wav");
+					CarregaSom (&tiro, "./sound/tiro.wav");
 					stop_sample(tiro);
 					play_sample(tiro, 255/2, 128, 900, 0);
 				}
@@ -726,7 +727,7 @@ void Creditos (void)
 
 		/* Granada */
 		if (i==Y_GRANADA)
-			CarregaBitmap(&granada, "./imagens/frames/granada.tga");
+			CarregaBitmap(&granada, "./imgs/frames/granada.tga");
 		if (i>=Y_GRANADA && i<Y_FINAL_GRANADA)
 			rotate_sprite(buffer, granada, X_CREDITOS+(i-Y_GRANADA)/2, RESOLUCAO_Y - i + Y_GRANADA, itofix(i*4));
 		if (i==Y_FINAL_GRANADA)
@@ -735,20 +736,20 @@ void Creditos (void)
 			granada=NULL;
 		}
 		if (i==Y_FINAL_GRANADA)
-			SeparaFrames("./imagens/frames/explode.tga", explode, 20);
+			SeparaFrames("./imgs/frames/explode.tga", explode, 20);
 		if (i>=Y_FINAL_GRANADA && i<Y_FINAL_GRANADA+40)
 		{
 			draw_sprite(buffer,explode[(i-Y_FINAL_GRANADA)/2], X_CREDITOS + 183, RESOLUCAO_Y - i + Y_GRANADA - (explode[0]->h));
 			if (i==Y_FINAL_GRANADA)
 			{
-				CarregaSom(&explosao, "./sons/explosao.wav");
+				CarregaSom(&explosao, "./sound/explosao.wav");
 				play_sample(explosao, 255, 128, 1000, 0);
 			}
  		}
 		/* Fim granada */
 
 		if (i==Y_ROCKETEIRO)
-			SeparaFrames("./imagens/frames/rocketeiro.tga", rocketeiro, 11);
+			SeparaFrames("./imgs/frames/rocketeiro.tga", rocketeiro, 11);
 		if (i>= Y_ROCKETEIRO && i<Y_ROCKETEIRO+300)
 			draw_sprite(buffer, rocketeiro[0], X_CREDITOS-20, RESOLUCAO_Y - i + Y_ROCKETEIRO);
 		if (i>=Y_ROCKETEIRO+300 && i<608)
@@ -772,7 +773,7 @@ void Creditos (void)
 		}
 
 		if (i==Y_TANQUE)
-			SeparaFrames("./imagens/frames/tanque.tga", tanque, 12);
+			SeparaFrames("./imgs/frames/tanque.tga", tanque, 12);
 		if (i>= Y_TANQUE && i<Y_FINAL_TANQUE)
 			rotate_sprite_v_flip(buffer, tanque[(i/3)%5 +7], X_CREDITOS - 10, RESOLUCAO_Y - i + Y_TANQUE , itofix(128));
 		if (i>=Y_FINAL_TANQUE && i<Y_FINAL_TANQUE+12)
@@ -782,7 +783,7 @@ void Creditos (void)
 		}
 
 		if (i==Y_MENDIGO)
-			SeparaFrames("./imagens/frames/mendigoanda.tga", mendigo, 12);
+			SeparaFrames("./imgs/frames/mendigoanda.tga", mendigo, 12);
 		if (i>=Y_MENDIGO && i<Y_FINAL_MENDIGO)
 		{
 			draw_sprite(buffer,mendigo[(i/3)%12], X_CREDITOS, RESOLUCAO_Y - i + Y_MENDIGO);
@@ -795,7 +796,7 @@ void Creditos (void)
 		
 		if (i==900)
 		{
-			CarregaSom (&aplausos, "./sons/aplausos.wav");
+			CarregaSom (&aplausos, "./sound/aplausos.wav");
 			play_sample(aplausos, 255, 128,1000,0);
 		}
 		if (i!=1047)
@@ -838,7 +839,7 @@ void Sair (void)
 	BITMAP * logotipo;
 	BITMAP * sair;
 	sair = create_bitmap(RESOLUCAO_X, RESOLUCAO_Y);
-	CarregaBitmap(&logotipo, "./imagens/logotipo.tga");
+	CarregaBitmap(&logotipo, "./imgs/logotipo.tga");
 	clear_to_color(sair, 0);
 	draw_sprite(sair, logotipo,13,0);
 	textprintf_centre_ex(sair, font, RESOLUCAO_X/2, 500, makecol(255,255,255),0,  "Agradece por usar nossos programas");
@@ -880,39 +881,39 @@ void Intro (void)
 	SAMPLE * tank;
 	SAMPLE * tiro;
 
-	TocaMp3(&musicaintro, "./sons/musicaintro.mp3");
+	TocaMp3(&musicaintro, "./sound/musicaintro.mp3");
 	install_int_ex(MusicaIntro, 10000);
 
 
-	CarregaSom (&passos, "./sons/passos.wav");
+	CarregaSom (&passos, "./sound/passos.wav");
 
-	SeparaFrames("./imagens/frames/parado.tga", parado, 3);
-	CarregaSom (&missile, "./sons/missile.wav");
-	SeparaFrames("./imagens/frames/atira.tga", atira, 4);
-	CarregaSom (&tiro, "./sons/tiro.wav");
-	SeparaFrames("./imagens/frames/pula.tga", pula, 7);
-	SeparaFrames("./imagens/frames/tanque.tga", tanque, 12);
-	CarregaSom (&tank, "./sons/tank.wav");
-	SeparaFrames("./imagens/frames/explode.tga", explode, 20);
-	CarregaBitmap(&granada, "./imagens/frames/granada.tga");
-	SeparaFrames("./imagens/frames/vira.tga", vira, 2);
-	SeparaFrames("./imagens/frames/tacabomba.tga", tacabomba, 5);
-	SeparaFrames("./imagens/frames/mendigo.tga", mendigo, 8);
-	SeparaFrames("./imagens/frames/anda.tga", anda, 9);
-	CarregaBitmap(&logotipo, "./imagens/logotipo.tga");
-	CarregaBitmap(&fundo, "./imagens/muro.tga");
-	CarregaBitmap(&bomba, "./imagens/frames/bomba.tga");
-	SeparaFrames("./imagens/frames/recarrega.tga", recarrega, 19);
-	CarregaSom (&recarrega1, "./sons/recarrega.wav");
-	SeparaFrames("./imagens/frames/explode2.tga", explode2, 20);
-	SeparaFrames("./imagens/frames/rocket.tga",rocket, 3);
-	CarregaBitmap(&missel, "./imagens/frames/missel.tga");
-	SeparaFrames("./imagens/frames/abaixa.tga", abaixa,4);
-	CarregaSom (&grito, "./sons/grito.wav");
-	SeparaFrames("./imagens/frames/queima.tga", queima, 20);
-	CarregaBitmap(&apresenta, "./imagens/apresenta.tga");
-	SeparaFrames("./imagens/frames/mendigoanda.tga", mendigoanda, 12);
-	CarregaSom (&explosao, "./sons/explosao.wav");
+	SeparaFrames("./imgs/frames/parado.tga", parado, 3);
+	CarregaSom (&missile, "./sound/missile.wav");
+	SeparaFrames("./imgs/frames/atira.tga", atira, 4);
+	CarregaSom (&tiro, "./sound/tiro.wav");
+	SeparaFrames("./imgs/frames/pula.tga", pula, 7);
+	SeparaFrames("./imgs/frames/tanque.tga", tanque, 12);
+	CarregaSom (&tank, "./sound/tank.wav");
+	SeparaFrames("./imgs/frames/explode.tga", explode, 20);
+	CarregaBitmap(&granada, "./imgs/frames/granada.tga");
+	SeparaFrames("./imgs/frames/vira.tga", vira, 2);
+	SeparaFrames("./imgs/frames/tacabomba.tga", tacabomba, 5);
+	SeparaFrames("./imgs/frames/mendigo.tga", mendigo, 8);
+	SeparaFrames("./imgs/frames/anda.tga", anda, 9);
+	CarregaBitmap(&logotipo, "./imgs/logotipo.tga");
+	CarregaBitmap(&fundo, "./imgs/muro.tga");
+	CarregaBitmap(&bomba, "./imgs/frames/bomba.tga");
+	SeparaFrames("./imgs/frames/recarrega.tga", recarrega, 19);
+	CarregaSom (&recarrega1, "./sound/recarrega.wav");
+	SeparaFrames("./imgs/frames/explode2.tga", explode2, 20);
+	SeparaFrames("./imgs/frames/rocket.tga",rocket, 3);
+	CarregaBitmap(&missel, "./imgs/frames/missel.tga");
+	SeparaFrames("./imgs/frames/abaixa.tga", abaixa,4);
+	CarregaSom (&grito, "./sound/grito.wav");
+	SeparaFrames("./imgs/frames/queima.tga", queima, 20);
+	CarregaBitmap(&apresenta, "./imgs/apresenta.tga");
+	SeparaFrames("./imgs/frames/mendigoanda.tga", mendigoanda, 12);
+	CarregaSom (&explosao, "./sound/explosao.wav");
 	FadeIn(fundo, 15);
 
 	for (i=0; i<730 && !keypressed() && !(mouse_b & 1) ;i++)
@@ -967,7 +968,7 @@ void Intro (void)
 		if (i>=124 && i<283) /* Mendigo fugindo do tanque */
 			draw_sprite(buffer, mendigo[(i-124)%8], (i-140)*6, 200);
 
-		if (i>=160 && i<=228) /* Tanque andando até enguiçar */
+		if (i>=160 && i<=228) /* Tanque andando atï¿½ enguiï¿½ar */
 		{
 			draw_sprite(buffer, tanque[(i-160)%12], (i-170)*6, 180);
 			if (i == 160 || i == 185)
@@ -999,7 +1000,7 @@ void Intro (void)
 		if (i==240) /* Tacow Berry saindo do tanque */
 			draw_sprite(buffer, pula[0],398, 170-(i-238));
 
-		if (i>=228 && i<356) /* Tanque enguiçado */
+		if (i>=228 && i<356) /* Tanque enguiï¿½ado */
 			draw_sprite(buffer, tanque[10], 348, 180);
 
 		if (i>=241 && i<247) /* Tacow Berry saindo do tanque */
@@ -1048,7 +1049,7 @@ void Intro (void)
 		if (i>=308 && i<365) /* Rocketeiro subindo */
 			draw_sprite(buffer,rocket[0], 300, RESOLUCAO_Y-i+308);
 
-		if (i>=365 && i<409) /* Rocketeiro lançando missel */
+		if (i>=365 && i<409) /* Rocketeiro lanï¿½ando missel */
 		{
 			rotate_sprite(buffer, missel, 320+(i-308-rocket[0]->h)*10, 532-(i-308-rocket[0]->h)*10, itofix(-32));
 			draw_sprite(buffer,rocket[0], 300, RESOLUCAO_Y-rocket[0]->h);
@@ -1083,7 +1084,7 @@ void Intro (void)
 				play_sample(passos, 255, 128, 1000, 1);
 		}
 
-		if (i>=409 && i<443) /* Rocketeiro lançando segundo missel */
+		if (i>=409 && i<443) /* Rocketeiro lanï¿½ando segundo missel */
 		{
 			rotate_sprite(buffer, missel, 320+(i-409)*9, 532-(i-409)*10, itofix(-38));
 			draw_sprite(buffer,rocket[0], 300, RESOLUCAO_Y-rocket[0]->h);
@@ -1103,7 +1104,7 @@ void Intro (void)
 				play_sample(explosao, 255, 128, 1000, 0);
 		}
 
-		if (i>=443 && i<489) /* Rocketeiro lançando terceiro missel */
+		if (i>=443 && i<489) /* Rocketeiro lanï¿½ando terceiro missel */
 		{
 			rotate_sprite(buffer, missel, 300+(i-443)*3.5, 532-(i-443)*10, itofix(-48));
 			draw_sprite(buffer,rocket[1], 300, RESOLUCAO_Y-rocket[1]->h);
@@ -1111,7 +1112,7 @@ void Intro (void)
 				play_sample(missile, 255/2, 128, 1000, 0);
 		}
 
-		if (i>=476 && i<510) /* Rocketeiro lançando quarto missel */
+		if (i>=476 && i<510) /* Rocketeiro lanï¿½ando quarto missel */
 		{
 			if (i<480)
 				draw_sprite(buffer,rocket[1], 300, RESOLUCAO_Y-rocket[1]->h);
@@ -1164,7 +1165,7 @@ void Intro (void)
 		if (i>=492 && i<512)
 			rotate_sprite_v_flip(buffer, rocket[1], 300, RESOLUCAO_Y-rocket[1]->h, itofix(128));
 
-		if (i>=495 && i<527) /* Missel 6 lançado */
+		if (i>=495 && i<527) /* Missel 6 lanï¿½ado */
 		{
 			rotate_sprite(buffer, missel, 290-(i-500)*2.7, 532-(i-495)*10, itofix(-85));
 			if (i==495)
@@ -1184,7 +1185,7 @@ void Intro (void)
 		if (i>=512 && i<619)
 			rotate_sprite_v_flip(buffer, rocket[0], 300, RESOLUCAO_Y-rocket[0]->h, itofix(128));
 		
-		if (i>=515 && i<550)/* Missel 7 lançado (eu juro que esse é o ultimo missel xD) */
+		if (i>=515 && i<550)/* Missel 7 lanï¿½ado (eu juro que esse ï¿½ o ultimo missel xD) */
 		{
 			rotate_sprite(buffer, missel, 290-(i-515)*6.5, 532-(i-515)*10, itofix(-96));
 			if (i==515)
@@ -1489,7 +1490,7 @@ void MusicaIntro(void)
 {
 	if (poll_mp3_file(musicaintro) != ALMP3_OK)
 	{
-		musicaintro = open_mp3_file("./sons/musicaintro.mp3");
+		musicaintro = open_mp3_file("./sound/musicaintro.mp3");
 		play_mp3_file(musicaintro, BUFSZ, 255, 128);
 	}
 }
