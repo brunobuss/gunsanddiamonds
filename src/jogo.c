@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <allegro.h>
+#include <logg.h>
 
 /* Valores constantes do Programa */
 #define TAM_JOIA                    28
