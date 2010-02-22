@@ -218,11 +218,6 @@ void Explosao (BITMAP*bitmap, float tamanho, int pos_x, int pos_y);
 void FadeIn(BITMAP *bitmap, int velocidade);
 void FadeOut(int velocidade);
 
-/* Sound Functions */
-/*void MusicaJogo(void);*/
-void MusicaIntro(void);
-void TocaMp3 (MP3FILE **mp3, char caminho[]);
-void ParaMp3 (MP3FILE *mp3);
 
 /* Aux Functions */
 void CarregaBitmap (BITMAP ** bitmap, char nome[]);
