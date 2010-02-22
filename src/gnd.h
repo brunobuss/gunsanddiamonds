@@ -232,4 +232,7 @@ int MouseEstaEmAlgumBotao(int largura_botao, int altura_botao);
 
 
 /* Global Variables */
+#ifndef GND_GLOBAL_VARS
 int volume;
+#define GND_GLOBAL_VARS
+#endif
