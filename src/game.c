@@ -718,8 +718,7 @@ void Intro (void)
 	SAMPLE * tank;
 	SAMPLE * tiro;
 
-	TocaMp3(&musicaintro, "./sound/musicaintro.mp3");
-	install_int_ex(MusicaIntro, 10000);
+	/*Inicia musica INTRO/MENU */
 
 
 	CarregaSom (&passos, "./sound/passos.wav");
