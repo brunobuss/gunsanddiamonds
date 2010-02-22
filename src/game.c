@@ -1,6 +1,7 @@
 #include "gnd.h"
 
 int menu_ja_foi_aberto=0;
+int volume = 128;
 
 BITMAP * buffer;
 BITMAP * fundomenu;
@@ -1174,3 +1175,8 @@ void Intro (void)
 	}
 }
 
+
+int GetVolume()
+{
+	return volume;
+}

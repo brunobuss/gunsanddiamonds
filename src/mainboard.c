@@ -270,7 +270,7 @@ void NovoJogo(void)
 
 				if(!clique) /* A troca nao eh valida */
 				{
-					play_sample(troca, volume, 128, 1000, 0);
+					play_sample(troca, GetVolume(), 128, 1000, 0);
 					show_mouse(NULL);
 					Troca(matriz_grade, coord_clique, buffer, fundo, Joias);
 					BufferToScreen(buffer, screen);
@@ -360,7 +360,7 @@ void NovoJogo(void)
 		{
 			/*Pausa o timer */
 			game_paused = 1;
-			play_sample(pause, volume, 128, 1000, 0);
+			play_sample(pause, GetVolume(), 128, 1000, 0);
 			GamePause(buffer, fundo);
 			/*Despausa o timer */
 			game_paused = 0;
@@ -371,7 +371,7 @@ void NovoJogo(void)
 			game_paused = 1;
 			if(pontos >= 10)
 			{
-				play_sample(dica, volume, 128, 1000, 0);
+				play_sample(dica, GetVolume(), 128, 1000, 0);
 				ProcuraDica(matriz_grade, buffer, fundo, Joias);
 				pontos -= 10;
 				show_mouse(NULL);
@@ -868,7 +868,7 @@ int DestroiCombinacoes(int linha, int coluna, BITMAP *buffer, BITMAP *fundo, JOI
 	{
 		ApagaQuadrado(linha, coluna, buffer, fundo);
 		matriz_grade[linha][coluna].joia = 0;
-		play_sample(vidro, volume, 128, 1000, 0);
+		play_sample(vidro, GetVolume(), 128, 1000, 0);
 		count_g += 1;
 	}
 
@@ -1196,7 +1196,7 @@ int SearchAndDestroy(JOIA matriz_grade[10][10], BITMAP *buffer, BITMAP* fundo)
 				count++;
 			}
 
-	if(count) play_sample(vidro, volume, 128, 1000, 0);
+	if(count) play_sample(vidro, GetVolume(), 128, 1000, 0);
 
 	rest(350);
 	stop_sample(vidro);

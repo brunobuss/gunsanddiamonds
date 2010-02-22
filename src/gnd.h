@@ -153,7 +153,7 @@ void Opcoes (void);
 void Ajuda (void);
 void Creditos (void);
 void Sair (void);
-
+int GetVolume();
 
 /* Main Game Functions */
 int CairPedras(BITMAP *fundo, JOIA matriz_grade[10][10], BITMAP *joias[8], BITMAP *buffer);
@@ -229,10 +229,3 @@ void CarregaBitmap (BITMAP ** bitmap, char nome[]);
 void CarregaSom (SAMPLE ** som, char nome[]);
 void SeparaFrames(char nome[], BITMAP * bitmap[], int frames);
 int MouseEstaEmAlgumBotao(int largura_botao, int altura_botao);
-
-
-/* Global Variables */
-#ifndef GND_GLOBAL_VARS
-int volume;
-#define GND_GLOBAL_VARS
-#endif
