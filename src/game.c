@@ -3,8 +3,8 @@
 int menu_ja_foi_aberto=0;
 int volume = 128;
 
-BITMAP * buffer;
-BITMAP * fundomenu;
+BITMAP* buffer;
+BITMAP* fundomenu;
 
 
 void IniciaJogo (void)
@@ -1178,4 +1178,10 @@ void Intro (void)
 int GetVolume()
 {
 	return volume;
+}
+
+
+BITMAP* GetBuffer()
+{
+	return buffer;
 }

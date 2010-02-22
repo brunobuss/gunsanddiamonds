@@ -3,7 +3,8 @@
 
 void EfeitoAbrir (BITMAP * bitmap, int comfundo, BITMAP * fundooo, int horizontalmente, int verticalmente, int pos_x, int pos_y, int velocidade)
 {
-	BITMAP * fundo;
+	BITMAP* fundo;
+	BITMAP* buffer = GetBuffer();
 	int efeitovertical;
 	float efeitohorizontal;
 	fundo = create_bitmap(RESOLUCAO_X, RESOLUCAO_Y);
@@ -74,6 +75,7 @@ void EfeitoAbrir (BITMAP * bitmap, int comfundo, BITMAP * fundooo, int horizonta
 
 void FadeIn(BITMAP *bitmap, int velocidade)
 {
+	BITMAP* buffer = GetBuffer();
 	int a;
 	clear(buffer);
 	for (a=0; a<256; a+=velocidade)
@@ -106,11 +108,12 @@ void Explosao (BITMAP*bitmap, float tamanho, int pos_x, int pos_y)
 
 void FadeOut(int velocidade)
 {
-    BITMAP *bmp_orig;
+	BITMAP *bmp_orig;
+	BITMAP* buffer = GetBuffer();	
 	int i;
 
-    if ((bmp_orig = create_bitmap(RESOLUCAO_X, RESOLUCAO_Y)))
-    {
+	if ((bmp_orig = create_bitmap(RESOLUCAO_X, RESOLUCAO_Y)))
+	{
 		clear(buffer);
 		blit(screen, bmp_orig, 0,0, 0,0, RESOLUCAO_X, RESOLUCAO_Y);
 		if (velocidade <= 0)

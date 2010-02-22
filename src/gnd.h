@@ -153,7 +153,9 @@ void Opcoes (void);
 void Ajuda (void);
 void Creditos (void);
 void Sair (void);
+
 int GetVolume();
+BITMAP* GetBuffer();
 
 /* Main Game Functions */
 int CairPedras(BITMAP *fundo, JOIA matriz_grade[10][10], BITMAP *joias[8], BITMAP *buffer);
